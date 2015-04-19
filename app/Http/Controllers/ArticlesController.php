@@ -5,6 +5,7 @@ use App\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Controllers\Controller;
 
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 // use Request;
@@ -13,6 +14,7 @@ class ArticlesController extends Controller {
 
 	public function index()
 	{
+//		return \Auth::user();
 		// $articles = Article::all();
 		// $articles = Article::order_by('published_at', 'desc')->get();
 		// $articles = Article::latest('published_at')->get();
@@ -40,7 +42,10 @@ class ArticlesController extends Controller {
 
 	public function store(ArticleRequest $request)
 	{
-		Article::create($request->all());
+		$article = new Article($request->all());
+
+		Auth::user()->articles()->save($article);
+		// Article::create($request->all()); // user_id =? Auth::user()->id
 
 		return redirect('articles');
 	}
