@@ -15,10 +15,16 @@ class CreateArticlesTable extends Migration {
 		Schema::create('articles', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('user_id')->unsigned();
 			$table->string('title');
 			$table->text('body');
 			$table->timestamps();
 			$table->timestamp('published_at');
+			// foreign key constraint (if user's account is deleted, his articles are also deleted)
+			$table->foreign('user_id')
+					->references('id')
+					->on('users')
+					->onDelete('cascade');
 		});
 	}
 
