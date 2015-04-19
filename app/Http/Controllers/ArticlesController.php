@@ -12,6 +12,11 @@ use Carbon\Carbon;
 
 class ArticlesController extends Controller {
 
+	public function __construct()
+	{
+	    $this->middleware('auth', ['except' => 'index']);
+	}
+
 	public function index()
 	{
 //		return \Auth::user();
@@ -37,6 +42,10 @@ class ArticlesController extends Controller {
 
 	public function create() 
 	{
+//		if(Auth::guest())
+//		{
+//			return redirect('articles');
+//		}
 		return view('articles.create');
 	}
 

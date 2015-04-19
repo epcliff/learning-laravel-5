@@ -1,6 +1,16 @@
 <?php
 
-Route::get('about', 'PagesController@about');
+//Route::get('about', 'PagesController@about');
+//Route::get('about', ['middleware' => 'auth', 'uses' => 'PagesController@about']);
+Route::get('about', ['middleware' => 'auth', function()
+{
+	return 'this page will only show if the user is signed in';
+}]);
+
+Route::get('foo',['middleware' => 'manager', function()
+{
+	return 'this page will only be viewed by a manager';
+}]);
 
 Route::get('contact', 'PagesController@contact');
 
