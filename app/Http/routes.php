@@ -4,6 +4,10 @@ use App\Http\Controllers\FooController;
 
 Route::get('foo', 'FooController@foo');
 
+Route::get('tags/{tags}', 'TagsController@show');
+
+
+
 //interface BarInterface {}
 
 //class Bar implements BarInterface {}

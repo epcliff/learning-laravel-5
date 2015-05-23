@@ -24,11 +24,15 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-//		$router->bind('articles', function() {
-//			return \App\Article::published()->findOrFail($id);
-//		});
+		$router->bind('articles', function($id) {
+			return \App\Article::published()->findOrFail($id);
+		});
+
+		$router->bind('tags', function($name) {
+			return \App\Tag::where('name', $name)->firstOrFail();
+		});
 		// enable route model bindings
-		$router->model('articles', 'App\Article');
+//		$router->model('tags', 'App\Tag');
 	}
 
 	/**

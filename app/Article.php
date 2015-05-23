@@ -29,6 +29,11 @@ class Article extends Model {
 		// $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
 		$this->attributes['published_at'] = Carbon::parse($date); // 2015-01-28 00:00:00
 	}
+	
+	public function getPublishedAtAttribute($date)
+	{
+	    return new Carbon($date);
+	}
 
 	/**
 	 * An article is owned by a user.
