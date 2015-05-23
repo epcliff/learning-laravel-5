@@ -23,13 +23,14 @@ class ArticlesController extends Controller {
 //		return \Auth::user();
 //		 $articles = Article::all();
 //		 $articles = Article::order_by('published_at', 'desc')->get();
-		 $articles = Article::latest('updated_at')->get();
+		$articles = Article::latest('updated_at')->get();
+		$latest = Article::latest()->first();
 		// $articles = Article::latest('published_at')->where('published_at', '<=', Carbon::now())->get();
 //		$articles = Article::latest('published_at')->published()->get();
 
 //		dd($articles);
 
-		return view('articles.index', compact('articles'));
+		return view('articles.index', compact('articles', 'latest'));
 	}
 
 	public function show(Article $article)
